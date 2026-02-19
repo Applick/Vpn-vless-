@@ -1,0 +1,28 @@
+services:
+  vlessserver:
+    container_name: vlessserver
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "${VLESS_PUBLISH_PORT:-443}:${VLESS_LISTEN_PORT:-443}/tcp"
+      - "${API_PUBLISH:-127.0.0.1:8080}:8080"
+    volumes:
+      - /etc/vpn:/etc/vpn
+      - ./logs:/var/log
+    environment:
+      - VLESS_STATE_DIR=${VLESS_STATE_DIR:-/etc/vpn}
+      - VLESS_ENDPOINT=${VLESS_ENDPOINT:-vpn.example.com}
+      - VLESS_LISTEN_ADDRESS=${VLESS_LISTEN_ADDRESS:-0.0.0.0}
+      - VLESS_LISTEN_PORT=${VLESS_LISTEN_PORT:-443}
+      - VLESS_WS_PATH=${VLESS_WS_PATH:-/vpn}
+      - VLESS_TLS_SERVER_NAME=${VLESS_TLS_SERVER_NAME:-}
+      - VLESS_TLS_CERT_PATH=${VLESS_TLS_CERT_PATH:-/etc/vpn/tls/server.crt}
+      - VLESS_TLS_KEY_PATH=${VLESS_TLS_KEY_PATH:-/etc/vpn/tls/server.key}
+      - VLESS_CLIENT_INSECURE_TLS=${VLESS_CLIENT_INSECURE_TLS:-true}
+      - VLESS_CLIENT_TUN_NAME=${VLESS_CLIENT_TUN_NAME:-sb-tun}
+      - VLESS_CLIENT_TUN_CIDR=${VLESS_CLIENT_TUN_CIDR:-172.19.0.1/30}
+      - API_BIND=${API_BIND:-0.0.0.0:8080}
+      - API_TOKEN=${API_TOKEN:?API_TOKEN is required}
+      - VLESS_AUTOSTART=${VLESS_AUTOSTART:-true}
+    restart: unless-stopped

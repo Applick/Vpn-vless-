@@ -1,0 +1,16 @@
+.git
+.idea
+dist
+logs
+tmp
+.gocache
+.tmp
+.tools
+ios-share
+.env
+.env.*
+client.settings.json
+Для тебя.md
+*.exe
+*.log
+**/.DS_Store

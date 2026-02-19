@@ -1,0 +1,31 @@
+# IDE and local editor state
+.idea/
+.vscode/
+
+# Local runtime and build caches
+.gocache/
+.tmp/
+.tools/
+
+# Local secrets and machine-specific settings
+.env
+.env.*
+!.env.example
+client.settings.json
+
+# Build artifacts
+dist/
+ios-share/
+*.exe
+*.zip
+*.tgz
+
+# Logs
+logs/
+*.log
+
+# Documentation
+*.md
+**/*.md
+!README.md
+!**/README.md
